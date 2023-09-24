@@ -1,0 +1,35 @@
+DM1:
+
+Concevoir une ALU qui fait les opérations suivantes:
+	-> addition
+	-> soustraction
+	-> AND, OR, XOR, NOT
+	-> multiplication S<=a*b
+
+
+	A(7.0) B(7.0)
+	|      |
+Opér	\      /=> flags
+      b0-\    / flag -> carry (retenu)
+      b1 -\  /	     -> Negative,Zero
+      b0  -\/ 	     -> Overflow(*) (retenu sur multiplication)
+	    |
+	   S(7.0)
+
+
+flag car neg zer over
+00    1    0  0    0
+01    0    1   0   0
+10    0    0   1   0
+11    0    0   0   1
+
+
+flag C N Z O
+000  0 0 0 0
+001  1 0 0 0
+010  1 1 0 0 
+011  
+100
+101
+110
+111
