@@ -27,6 +27,7 @@ begin
     carry <= false;
     overflow <= false;
     negatif <= false;
+    zero <= false;
 
     case Ope is
         when "000" =>
@@ -39,17 +40,21 @@ begin
             end if;
 
         when "001" =>
-            resultat <= A - B;
             if (A > B) then
+                resultat <= A - B;
                 negatif <= false;
-            else
+            elsif (A = B) then
+                resultat <= A - B;
+                zero <= true;
+            elsif (A < B) then
+                resultat <= B - A;               
                 negatif <= true;
             end if;
 
         when "010" =>
             over <= A * B;
-            resultat <= over(7 downto 0);
-            if (over(15 downto 8) /= "00000000") then
+            resultat <= over (7 downto 0);
+            if (over(15 downto 8) = "00000000") then
                 overflow <= false;
             else 
                 overflow <= true;
@@ -69,10 +74,10 @@ begin
 
         when others =>
             resultat <= (others => '0');  -- Par défaut, résultat nul
+            over <= (others => '0');
     end case;
 
-    end process;
-           
+    end process;    
     
 
     Flag <= "00" when carry     else
@@ -80,7 +85,7 @@ begin
             "10" when zero      else
             "11" when overflow  else
             "00";
-
+    
     S <= resultat;
         
 end architecture;
