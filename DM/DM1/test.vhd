@@ -5,7 +5,7 @@ use ieee.std_logic_arith.all;    -- Pour les opérations signées
 use ieee.numeric_std.all;
 
 library work; -- Vous pouvez également utiliser une autre bibliothèque si nécessaire.
-use work.ALU; -- Utilisez "all" si vous voulez inclure toutes les entités et packages de dm1.vhd.
+use work.DM1_corr; -- Utilisez "all" si vous voulez inclure toutes les entités et packages de dm1.vhd.
 entity test is
     -- Déclarations de vos ports ici
 end entity test;
@@ -23,12 +23,6 @@ begin
     test_process: process
     begin
         -- Mettez A à 1 pendant 10 ns
-
-        
-        Ope <= "111";
-        A <= "00000000";
-        B <= "00000000";
-        wait for 10 ns;
                 
         Ope <= "000";
         A <= "00000011";
@@ -95,10 +89,10 @@ begin
         B <= "00101010";
         wait for 100 ns;
         
-        Ope <= "110";
-        A <= "10101010";
-        B <= "00000000";
-        wait for 100 ns;
+        --Ope <= "110";
+        --A <= "1011010";
+        --B <= "00000000";
+        --wait for 100 ns;
         
 
         
@@ -108,7 +102,7 @@ begin
     end process test_process;
 
     -- Instanciation de DM1_Entity
-    DM1 : entity work.ALU
+    DM1 : entity work.DM1_corr
         port map (
             -- Connectez les ports d'entrée/sortie de DM1_Entity à vos signaux/variables
             A => A,
